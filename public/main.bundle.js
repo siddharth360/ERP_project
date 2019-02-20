@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n<app-footer></app-footer>\n  \n"
+module.exports = "<app-navbar></app-navbar>\n  <br>\n  <br>\n  <flash-messages></flash-messages>\n  <router-outlet></router-outlet>\n<app-footer></app-footer>\n  \n"
 
 /***/ }),
 
@@ -1121,7 +1121,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div class=\"parallax\">\n      <div class=\"container mt-3 padding mytext\" align=\"center\" >\n       \n        <div class=\"col-6 col-offset-3 padding\"  >\n            <h2 class=\"page-header\">Register</h2>\n          <form   (submit)=\"onRegisterSubmit()\">\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>First Name</label>\n                      <input type=\"text\" [(ngModel)]=\"firstName\" name=\"firstName\" class=\"form-control\">\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>Last Name</label>\n                      <input type=\"text\" [(ngModel)]=\"lastName\" name=\"lastName\" class=\"form-control\">\n                </div>\n              </div>\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>Email</label>\n                      <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\" >\n                </div>\n              </div>\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>Password</label>\n                      <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\">\n                </div>\n              </div>\n              <input type=\"submit\" class=\"btn btn-success\" value=\"Submit\">\n              <br>\n              <br>\n         <p>Already have a account ?  <a [routerLink]=\"['/login']\">Login Here</a><br><br>\n            \n         </p> \n            </form>\n        </div>\n      </div>\n</div>\n\n"
+module.exports = "<div class=\"parallax\">\n      <div class=\"container mt-3 padding mytext\" align=\"center\" >\n        <div class=\"col-6 col-offset-3 padding\"  >\n            <h2 class=\"page-header\">Register</h2>\n          <form   (submit)=\"onRegisterSubmit()\">\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>First Name</label>\n                      <input type=\"text\" [(ngModel)]=\"firstName\" name=\"firstName\" class=\"form-control\">\n                  </div>\n              </div>\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>Last Name</label>\n                      <input type=\"text\" [(ngModel)]=\"lastName\" name=\"lastName\" class=\"form-control\">\n                </div>\n              </div>\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>Email</label>\n                      <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\" >\n                </div>\n              </div>\n              <div class=\"form-group\">\n                  <div class=\"col-6 col-offset-3\" >\n                      <label>Password</label>\n                      <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\">\n                </div>\n              </div>\n              <input type=\"submit\" class=\"btn btn-success\" value=\"Submit\">\n              <br>\n              <br>\n         <p>Already have a account ?  <a [routerLink]=\"['/login']\">Login Here</a><br><br>\n            \n         </p> \n            </form>\n        </div>\n      </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -1521,7 +1521,7 @@ var AuthService = (function () {
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(' user/authenticate', user, { headers: headers })
+        return this.http.post('user/authenticate', user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.forgotpasswordUser = function (user) {
