@@ -1,5 +1,19 @@
 webpackJsonp(["vendor"],{
 
+/***/ "../../../../angular2-flash-messages/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__("../../../../angular2-flash-messages/module/index.js"));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "../../../../angular2-flash-messages/module/flash-message.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7,24 +21,16 @@ webpackJsonp(["vendor"],{
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var FlashMessage = (function () {
-    function FlashMessage(text, cssClass, closeOnClick, showCloseBtn) {
+    function FlashMessage(text, cssClass) {
         this.id = (FlashMessage.nextId++);
         this.text = 'default text';
         this.cssClass = '';
-        this.closeOnClick = false;
-        this.showCloseBtn = false;
-        if (text)
-            this.text = text;
-        if (cssClass)
-            this.cssClass = cssClass;
-        if (closeOnClick)
-            this.closeOnClick = closeOnClick;
-        if (showCloseBtn)
-            this.showCloseBtn = showCloseBtn;
+        this.text = text;
+        this.cssClass = cssClass;
     }
-    FlashMessage.nextId = 0;
     return FlashMessage;
 }());
+FlashMessage.nextId = 0;
 exports.FlashMessage = FlashMessage;
 //# sourceMappingURL=flash-message.js.map
 
@@ -45,8 +51,6 @@ var FlashMessagesComponent = (function () {
         this._cdRef = _cdRef;
         this._defaults = {
             text: 'default message',
-            closeOnClick: false,
-            showCloseBtn: false,
             cssClass: ''
         };
         this.messages = [];
@@ -61,31 +65,18 @@ var FlashMessagesComponent = (function () {
         if (options === void 0) { options = {}; }
         var defaults = {
             timeout: 2500,
-            closeOnClick: false,
-            showCloseBtn: false,
-            cssClass: '',
-            text: "default message"
+            cssClass: ''
         };
         for (var attrname in options) {
             defaults[attrname] = options[attrname];
         }
-        var message = new flash_message_1.FlashMessage(text, defaults.cssClass, defaults.closeOnClick, defaults.showCloseBtn);
-        message.timer = window.setTimeout(function () {
+        var message = new flash_message_1.FlashMessage(text, defaults.cssClass);
+        this.messages.push(message);
+        this._cdRef.detectChanges();
+        window.setTimeout(function () {
             _this._remove(message);
             _this._cdRef.detectChanges();
         }, defaults.timeout);
-        this.messages.push(message);
-        this._cdRef.detectChanges();
-    };
-    FlashMessagesComponent.prototype.close = function (message) {
-        clearTimeout(message.timer);
-        this._remove(message);
-        this._cdRef.detectChanges();
-    };
-    FlashMessagesComponent.prototype.alertClicked = function (message) {
-        if (message.closeOnClick) {
-            this.close(message);
-        }
     };
     FlashMessagesComponent.prototype.grayOut = function (value) {
         if (value === void 0) { value = false; }
@@ -94,19 +85,19 @@ var FlashMessagesComponent = (function () {
     FlashMessagesComponent.prototype._remove = function (message) {
         this.messages = this.messages.filter(function (msg) { return msg.id !== message.id; });
     };
-    FlashMessagesComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'flash-messages',
-                    template: "\n      <div id=\"flashMessages\" class=\"flash-messages\">\n          <div id=\"grayOutDiv\" *ngIf='_grayOut && messages.length'></div>\n          <div class=\"alert flash-message {{message.cssClass}}\" [ngClass]=\"{'alert-dismissible':message.showCloseBtn}\" [style.cursor]=\"message.closeOnClick?'pointer':'inherit'\" *ngFor='let message of messages' (click)=\"alertClicked(message)\">\n              <button *ngIf=\"message.showCloseBtn\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\" (click)=\"close(message)\"><span aria-hidden=\"true\">&times;</span></button>\n              <p>{{message.text}}</p>\n          </div> \n      </div>\n  "
-                },] },
-    ];
-    /** @nocollapse */
-    FlashMessagesComponent.ctorParameters = function () { return [
-        { type: flash_messages_service_1.FlashMessagesService, },
-        { type: core_1.ChangeDetectorRef, },
-    ]; };
     return FlashMessagesComponent;
 }());
+FlashMessagesComponent.decorators = [
+    { type: core_1.Component, args: [{
+                selector: 'flash-messages',
+                template: "\n      <div id=\"flashMessages\" class=\"flash-messages {{classes}}\">\n          <div id=\"grayOutDiv\" *ngIf='_grayOut && messages.length'></div>\n          <div class=\"alert flash-message {{message.cssClass}}\" *ngFor='let message of messages'>\n              <p>{{message.text}}</p>\n          </div> \n      </div>\n  "
+            },] },
+];
+/** @nocollapse */
+FlashMessagesComponent.ctorParameters = function () { return [
+    { type: flash_messages_service_1.FlashMessagesService, },
+    { type: core_1.ChangeDetectorRef, },
+]; };
 exports.FlashMessagesComponent = FlashMessagesComponent;
 //# sourceMappingURL=flash-messages.component.js.map
 
@@ -122,13 +113,13 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var FlashMessagesService = (function () {
     function FlashMessagesService() {
     }
-    FlashMessagesService.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /** @nocollapse */
-    FlashMessagesService.ctorParameters = function () { return []; };
     return FlashMessagesService;
 }());
+FlashMessagesService.decorators = [
+    { type: core_1.Injectable },
+];
+/** @nocollapse */
+FlashMessagesService.ctorParameters = function () { return []; };
 exports.FlashMessagesService = FlashMessagesService;
 //# sourceMappingURL=flash-messages.service.js.map
 
@@ -161,24 +152,18 @@ var flash_messages_service_1 = __webpack_require__("../../../../angular2-flash-m
 var FlashMessagesModule = (function () {
     function FlashMessagesModule() {
     }
-    FlashMessagesModule.forRoot = function () {
-        return {
-            ngModule: FlashMessagesModule,
-            providers: [flash_messages_service_1.FlashMessagesService]
-        };
-    };
-    FlashMessagesModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [common_1.CommonModule],
-                    declarations: [flash_messages_component_1.FlashMessagesComponent],
-                    exports: [flash_messages_component_1.FlashMessagesComponent],
-                    providers: []
-                },] },
-    ];
-    /** @nocollapse */
-    FlashMessagesModule.ctorParameters = function () { return []; };
     return FlashMessagesModule;
 }());
+FlashMessagesModule.decorators = [
+    { type: core_1.NgModule, args: [{
+                imports: [common_1.CommonModule],
+                declarations: [flash_messages_component_1.FlashMessagesComponent],
+                exports: [flash_messages_component_1.FlashMessagesComponent],
+                providers: [flash_messages_service_1.FlashMessagesService]
+            },] },
+];
+/** @nocollapse */
+FlashMessagesModule.ctorParameters = function () { return []; };
 exports.FlashMessagesModule = FlashMessagesModule;
 //# sourceMappingURL=module.js.map
 
