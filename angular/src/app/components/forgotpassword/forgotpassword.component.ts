@@ -32,7 +32,7 @@ export class ForgotpasswordComponent implements OnInit {
             this.router.navigate(['login']);
            
           } else {
-            this.flashMessage.show('fill your correct email first', {cssClass: 'alert-success', timeout: 2000});
+            this.flashMessage.show('fill your correct email first', {cssClass: 'alert-danger', timeout: 2000});
             this.router.navigate(['forgotpassword']);
           }
       });
