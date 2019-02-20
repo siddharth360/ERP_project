@@ -57,7 +57,7 @@ export class AuthService {
     if(this.isDev){
       return ep;
     } else {
-      return ''+ep;
+      return 'https://erpproject.herokuapp.com'+ep;
     }
   }
   storeUserData(token, user) {
