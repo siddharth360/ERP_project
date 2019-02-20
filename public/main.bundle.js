@@ -1541,18 +1541,16 @@ var AuthService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        var ep = this.prepEndpoint('user/profile');
-        return this.http.get(ep, { headers: headers })
+        return this.http.get('user/profile', { headers: headers })
             .map(function (res) { return res.json(); });
     };
-    AuthService.prototype.prepEndpoint = function (ep) {
-        if (this.isDev) {
-            return ep;
-        }
-        else {
-            return 'https://erpproject.herokuapp.com' + ep;
-        }
-    };
+    // prepEndpoint(ep){
+    //   if(this.isDev){
+    //     return ep;
+    //   } else {
+    //     return 'https://erpproject.herokuapp.com'+ep;
+    //   }
+    // }
     AuthService.prototype.storeUserData = function (token, user) {
         localStorage.setItem('id_token', token);
         localStorage.setItem('user', JSON.stringify(user));
@@ -1581,8 +1579,7 @@ var AuthService = (function () {
     AuthService.prototype.getTask = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        var ep = this.prepEndpoint('user/showtask');
-        return this.http.get(ep, { headers: headers })
+        return this.http.get('user/showtask', { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.updateTask = function (id, info) {
