@@ -48,18 +48,19 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-      let ep = this.prepEndpoint('user/profile');
-       return this.http.get(ep,{headers: headers})
+    return this.http.get('user/profile', {headers: headers})
+      // let ep = this.prepEndpoint('user/profile');
+      //  return this.http.get(ep,{headers: headers})
       .map(res => res.json());
   }
   
-  prepEndpoint(ep){
-    if(this.isDev){
-      return ep;
-    } else {
-      return 'https://erpproject.herokuapp.com'+ep;
-    }
-  }
+  // prepEndpoint(ep){
+  //   if(this.isDev){
+  //     return ep;
+  //   } else {
+  //     return 'https://erpproject.herokuapp.com'+ep;
+  //   }
+  // }
   storeUserData(token, user) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
@@ -93,8 +94,9 @@ export class AuthService {
   getTask() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-      let ep = this.prepEndpoint('user/showtask');
-       return this.http.get(ep,{headers: headers})
+    return this.http.get('user/showtask', {headers: headers})
+      // let ep = this.prepEndpoint('user/showtask');
+      //  return this.http.get(ep,{headers: headers})
       .map(res => res.json());
   }
 
