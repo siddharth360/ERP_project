@@ -1,4 +1,4 @@
 module.exports={
-    database: 'mongodb://moberp1:moberp1@ds343985.mlab.com:43985/moberp',
+    database: 'mongodb://siddharth:siddharth1@ds221155.mlab.com:21155/angularapp1',
     secret : 'secret your'
 }
